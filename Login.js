@@ -1,6 +1,7 @@
 'use strict';
 
 var React = require('react');
+var Component = require('react');
 var ReactNative = require('react-native');
 var {
   AppRegistry,
@@ -12,8 +13,11 @@ var {
   TouchableHighlight
 } = require('react-native');
 
-var Login = React.createClass({
-	render: function(){
+class Login extends React.Component {
+	constructor(props){
+		super(props);
+	}
+	render(){
 		return (
 			<View style={styles.container}>
 				<Image style={styles.logo}
@@ -21,9 +25,13 @@ var Login = React.createClass({
 				<Text style={styles.heading}>
 					Github browser
 				</Text>
-				<TextInput style={styles.input}
+				<TextInput
+					onChangeText={(text)=>this.setState({username: text})}
+				  style={styles.input}
 					placeholoder="Github username" />
-				<TextInput style={styles.input}
+				<TextInput
+					onChangeText={(text)=>this.setState({password: text})}
+				  style={styles.input}
 					placeholoder="Github password"
 					secureTextEntry="true" />
 				<TouchableHighlight
@@ -36,7 +44,7 @@ var Login = React.createClass({
 			</View>
 		);
 	}
-});
+}
 
 var styles = StyleSheet.create({
   container: {
