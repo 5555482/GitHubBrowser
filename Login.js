@@ -28,21 +28,26 @@ class Login extends React.Component {
 				<TextInput
 					onChangeText={(text)=>this.setState({username: text})}
 				  style={styles.input}
-					placeholoder="Github username" />
+					placeholoder="Github username"
+			  />
 				<TextInput
 					onChangeText={(text)=>this.setState({password: text})}
 				  style={styles.input}
 					placeholoder="Github password"
-					secureTextEntry="true" />
+					secureTextEntry={true}
+				/>
 				<TouchableHighlight
+					onPress={this.onLoginPressed.bind(this)}
 					style={styles.button}>
 					<Text style={styles.buttonText}>
 						Log in
 					</Text>
 				</TouchableHighlight>
-
 			</View>
 		);
+	}
+	onLoginPressed(){
+		console.log('Attempting to log in with username ' + this.state.username);
 	}
 }
 
