@@ -12,10 +12,25 @@ var Login = require('./Login');
 
 var GithubBrowser = React.createClass({
   render: function() {
-    var message ="hello";
-    return (
-      <Login />
-    );
+    if(this.state.isLoggedIn){
+      return (
+        <View style={styles.container}>
+          <Text style={styles.welcome}>Logged in!</Text>
+        </View>
+      );
+    }else{
+      return (
+        <Login onLogin={this.onLogin} />
+      );
+    }
+  },
+  onLogin: function(){
+    this.setState({isLoggedIn: true});
+  },
+  getInitialState: function(){
+    return {
+      isLoggedIn: false
+    }
   }
 });
 
