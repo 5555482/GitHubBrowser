@@ -5,17 +5,29 @@ var {
   AppRegistry,
   StyleSheet,
   Text,
-  View
+  View,
+  ActivityIndicatorIOS
 } = require('react-native');
 
 var Login = require('./Login');
-
+var AuthService = require('./AuthService');
 var GithubBrowser = React.createClass({
+  componentDidMount: function(){
+    AuthService.getAuthInfo((err, authInfo)=>{
+      this.setState({
+        checkingAuth: false,
+        isLoggedIn: authInfo != null
+      })
+    })
+  },
   render: function() {
-    if(this.state.isLoggedIn){
+    if(this.state.checkingAuth){
       return (
         <View style={styles.container}>
-          <Text style={styles.welcome}>Logged in!</Text>
+          <ActivityIndicatorIOS
+            animating={true}
+            size="large"
+            style={styles.loader} />
         </View>
       );
     }else{
@@ -29,7 +41,8 @@ var GithubBrowser = React.createClass({
   },
   getInitialState: function(){
     return {
-      isLoggedIn: false
+      isLoggedIn: false,
+      checkingAuth: true
     }
   }
 });
